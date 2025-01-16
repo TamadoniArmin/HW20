@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="MoayeneFani\Cars\DTOs\" />
+    <Folder Include="MoayeneFani\Operators\Enum\" />
+    <Folder Include="MoayeneFani\Requests\DTOs\" />
+    <Folder Include="MoayeneFani\Requests\Enum\" />
+    <Folder Include="MoayeneFani\UsersCars\DTOs\" />
+    <Folder Include="MoayeneFani\UsersCars\Enum\" />
+    <Folder Include="MoayeneFani\Users\Enum\" />
+  </ItemGroup>
+
+</Project>

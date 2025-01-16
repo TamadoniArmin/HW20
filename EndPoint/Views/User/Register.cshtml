@@ -1,0 +1,52 @@
+﻿@{
+	ViewData["Title"] = "User Register";
+}
+<h2>ثبتنام</h2>
+<style>
+	body {
+		direction: rtl;
+		font-family: 'IRANSans', Tahoma, sans-serif;
+	}
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+	}
+
+	th, td {
+		border: 1px solid black;
+		padding: 8px;
+		text-align: right;
+	}
+
+	th {
+		background-color: #f2f2f2;
+	}
+</style>
+<form asp-action="Register" method="post">
+	<div class="form-group">
+		<label for="Gmail">Gmail</label>
+		<input type="text" class="form-control" id="Gmail" name="Gmail" required />
+	</div>
+	<div class="form-group">
+		<label for="Password">Password</label>
+		<input type="password" class="form-control" id="Password" name="Password" required />
+	</div>
+	<div class="form-group">
+		<label for="FirstName">FirstName</label>
+		<input type="text" class="form-control" id="FirstName" name="FirstName" required />
+	</div>
+	<div class="form-group">
+		<label for="LastName">LastName</label>
+		<input type="text" class="form-control" id="LastName" name="LastName" required />
+	</div>
+	<div class="form-group">
+		<label for="PhoneNumber">PhoneNumber</label>
+		<input type="number" class="form-control" id="PhoneNumber" name="PhoneNumber" required />
+	</div>
+	<div class="form-group">
+		<label for="NationalCode">NationalCode</label>
+		<input type="number" class="form-control" id="NationalCode" name="NationalCode" required />
+	</div>
+	<button type="submit" class="btn btn-primary">Continue</button>
+</form>

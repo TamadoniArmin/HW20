@@ -1,0 +1,50 @@
+﻿@using App.Domain.Core.MoayeneFani.Cars.Entities;
+@model Car
+@{
+	ViewData["Title"] = "Search By CarID";
+}
+<h2>Search</h2>
+<style>
+	body {
+		direction: rtl;
+		font-family: 'IRANSans', Tahoma, sans-serif;
+	}
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+	}
+
+	th, td {
+		border: 1px solid black;
+		padding: 8px;
+		text-align: right;
+	}
+
+	th {
+		background-color: #f2f2f2;
+	}
+</style>
+<form asp-action="FindById" method="post">
+	<div class="form-group">
+		<label for="id">id</label>
+		<input type="text" class="form-control" id="id" name="id" required />
+	</div>
+	<button type="submit" class="btn btn-primary">Continue</button>
+</form>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Company</th>
+		</tr>
+	</thead>
+	<tbody>
+			<tr>
+				<td>@Model.Name</td>
+				<td>@Model.Company</td>
+				@* <td><a class="btn btn-warning" asp-action="Edit" asp-controller="User" asp-route-cardNumber=@item.Id>Edit</a></td>
+				<td><a class="btn btn-danger" asp-action="Delete" asp-controller="User" asp-route-cardNumber=@item.Id>Delete</a></td> *@
+			</tr>
+	</tbody>
+</table>

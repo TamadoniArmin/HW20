@@ -1,0 +1,89 @@
+﻿@{
+	ViewData["Title"] = "Oprator Page";
+}
+<h2>صفحه ی اوپراتور ها</h2>
+<style>
+	body {
+		direction: rtl;
+		font-family: 'IRANSans', Tahoma, sans-serif;
+	}
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+	}
+
+	th, td {
+		border: 1px solid black;
+		padding: 8px;
+		text-align: right;
+	}
+
+	th {
+		background-color: #f2f2f2;
+	}
+</style>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Option</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>مشاهده کل لیست درخواست ها</td>
+			<td><a class="btn btn-primary" asp-action="SeeAllRequest" asp-controller="Request">Continue</a></td>
+		</tr>
+		<tr>
+			<td> مشاهده ی لیست درخواست های تایید شده</td>
+			<td><a class="btn btn-primary" asp-action="SeeComfirmedRequests" asp-controller="Request">Continue</a></td>
+		</tr>
+		<tr>
+			<td>مشاهده ی لیست درخواست های تایید نشده</td>
+			<td><a class="btn btn-primary" asp-action="SeeNotComfirmedRequests" asp-controller="Request">Continue</a></td>
+		</tr>
+@* 		<tr>
+			<td>مشاهده ی لیست درخواست های خارج از سرویس</td>
+			<td><a class="btn btn-warning" asp-action="EditUser" asp-controller="User">Continue</a></td>
+		</tr> *@
+@* 		<tr>
+			<td>مشاهده ی لیست کاربران</td>
+			<td><a class="btn btn-warning" asp-action="EditUser" asp-controller="User">Continue</a></td>
+		</tr> *@
+		<tr>
+			<td>مشاهده ی لیست خوردو</td>
+			<td><a class="btn btn-primary" asp-action="SeeAllCars" asp-controller="Car">Continue</a></td>
+		</tr>
+				<tr>
+			<td>پیدا کردن درخواست از طریق کد ملی</td>
+			<td><a class="btn btn-primary" asp-action="FindByPerson" asp-controller="UserCar">Continue</a></td>
+		</tr>
+				<tr>
+			<td>مشاهده ی خودرو های ایران خودرو</td>
+			<td><a class="btn btn-primary" asp-action="SeeIranKhodroCars" asp-controller="Car">Continue</a></td>
+		</tr>
+		<tr>
+			<td>مشاهده ی خودرو های سایپا</td>
+			<td><a class="btn btn-primary" asp-action="SeeSaipaCars" asp-controller="Car">Continue</a></td>
+		</tr>
+
+	</tbody>
+</table>
+@* <a class="btn btn-primary" asp-action="AddUser" asp-controller="User">Add user</a>
+@if (TempData["LengthOfNC"] != null)
+{
+	<div class="alert alert-danger">@TempData["LengthOfNC"] </div>
+}
+@if (TempData["Faile to add"] != null)
+{
+	<div class="alert alert-danger">@TempData["Faile to add"] </div>
+}
+@if (TempData["Faile edit"] != null)
+{
+	<div class="alert alert-danger">@TempData["Faile edit"] </div>
+}
+@if (TempData["Faile deleting"] != null)
+{
+	<div class="alert alert-danger">@TempData["Faile deleting"] </div> *@
+}
+

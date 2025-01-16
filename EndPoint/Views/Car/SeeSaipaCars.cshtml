@@ -1,0 +1,70 @@
+﻿@using App.Domain.Core.MoayeneFani.Cars.Entities;
+@model List<Car>
+@{
+	ViewData["Title"] = "Saipa Cars";
+}
+<h2>لیست خودرو های سایپا</h2>
+<style>
+	body {
+		direction: rtl;
+		font-family: 'IRANSans', Tahoma, sans-serif;
+	}
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+	}
+
+	th, td {
+		border: 1px solid black;
+		padding: 8px;
+		text-align: right;
+	}
+
+	th {
+		background-color: #f2f2f2;
+	}
+</style>
+<form asp-action="Search" method="post">
+	<div class="form-group">
+		<label for="Search">Search</label>
+		<input type="text" class="form-control" id="Search" name="Partofname" required />
+	</div>
+	<button type="submit" class="btn btn-primary">Continue</button>
+</form>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Company</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>@item.Name</td>
+				<td>@item.Company</td>
+				@* <td><a class="btn btn-warning" asp-action="EditUser" asp-controller="User" asp-route-Id=@item.Id>Edit</a></td>
+				<td><a class="btn btn-danger" asp-action="DeleteUser" asp-controller="User" asp-route-id=@item.Id>Delete</a></td> *@
+			</tr>
+		}
+	</tbody>
+</table>
+@* <a class="btn btn-primary" asp-action="AddUser" asp-controller="User">Add user</a> *@
+@* @if (TempData["LengthOfNC"] != null)
+{
+	<div class="alert alert-danger">@TempData["LengthOfNC"] </div>
+}
+@if (TempData["Faile to add"] != null)
+{
+	<div class="alert alert-danger">@TempData["Faile to add"] </div>
+}
+@if (TempData["Faile edit"] != null)
+{
+	<div class="alert alert-danger">@TempData["Faile edit"] </div>
+}
+@if (TempData["Faile deleting"] != null)
+{
+	<div class="alert alert-danger">@TempData["Faile deleting"] </div>
+} *@

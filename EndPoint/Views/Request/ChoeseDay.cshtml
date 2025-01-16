@@ -1,0 +1,40 @@
+﻿@model List<DayOfWeek>
+@{
+	ViewData["Title"] = "Choese Day of Week";
+}
+<h2>انتخاب روز</h2>
+<style>
+	body {
+		direction: rtl;
+		font-family: 'IRANSans', Tahoma, sans-serif;
+	}
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+	}
+
+	th, td {
+		border: 1px solid black;
+		padding: 8px;
+		text-align: right;
+	}
+
+	th {
+		background-color: #f2f2f2;
+	}
+</style>
+<form asp-action="ChoeseDay" method="post">
+	<div class="alert alert-warning"><p>ممکن است روزی که انتخاب میکنید از قبل پر شده باشد در این صورت  باقی روز ها را انتخاب کنید</p></div>
+	<div class="input-group mb-3">
+		<label class="input-group-text" for="inputGroupSelect01">day</label>
+		<select class="form-select" id="inputGroupSelect01" name="day">
+			<option selected>Choose gender...</option>
+			@foreach (var item in Model)
+			{
+				<option value="@item" required>@item</option>
+			}
+		</select>
+	</div>
+	<button type="submit" class="btn btn-primary">Continue</button>
+</form>
