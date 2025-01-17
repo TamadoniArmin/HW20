@@ -28,7 +28,7 @@ namespace EndPoint.Controllers
             else
             {
                 TempData["Succes register"] = "You have registered succesfully. Now please login";
-                return RedirectToAction("");//Login
+                return RedirectToAction("Login");
             }
         }
         public IActionResult Login()
@@ -54,7 +54,7 @@ namespace EndPoint.Controllers
                 else
                 {
                     InmmemoryDB.CurrentUser = UserDTO.CurrentUser;
-                    return RedirectToAction("Home");
+                    return RedirectToAction("Index", "Home");
                 }
             }
         }
@@ -65,7 +65,7 @@ namespace EndPoint.Controllers
             if(!Result)
             {
                 TempData["systom Error"] = "There is Current User in Memmory!!!?";
-                return RedirectToAction("Home");
+                return RedirectToAction("Index","Home");
             }
             return RedirectToAction("Login");
         }

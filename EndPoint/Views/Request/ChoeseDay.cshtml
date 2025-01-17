@@ -29,7 +29,7 @@
 	<div class="input-group mb-3">
 		<label class="input-group-text" for="inputGroupSelect01">day</label>
 		<select class="form-select" id="inputGroupSelect01" name="day">
-			<option selected>Choose gender...</option>
+			<option selected>Choose a day</option>
 			@foreach (var item in Model)
 			{
 				<option value="@item" required>@item</option>
@@ -38,3 +38,12 @@
 	</div>
 	<button type="submit" class="btn btn-primary">Continue</button>
 </form>
+@if (TempData["Reached to day limit"] != null)
+{
+	<div class="alert alert-danger">@TempData["Reached to day limit"] </div>
+}
+@if (TempData["Faile to choes this day"] != null)
+{
+	<div class="alert alert-danger">@TempData["Faile to choes this day"] </div>
+}
+

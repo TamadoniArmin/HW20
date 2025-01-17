@@ -72,6 +72,8 @@ namespace Connection.Migrations
                     Plate = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CarName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CarId = table.Column<int>(type: "int", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Company = table.Column<int>(type: "int", nullable: false),
                     ProductionDate = table.Column<DateOnly>(type: "date", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: true),

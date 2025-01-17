@@ -4,13 +4,13 @@ namespace EndPoint.Models
 {
     public class CheckDayLimit : ICheckDayLimit
     {
-        public int? SunDayLimit { get; set; } = InmmemoryDB.OddDaysLimit;//یکشنبه
-        public int? MondayLimit { get; set; } = InmmemoryDB.EvenDaysLimit;//دونشنبه
-        public int? TuesdayLimit { get; set; } = InmmemoryDB.OddDaysLimit;//سه شنبه
-        public int? WednesdayLimit { get; set; } = InmmemoryDB.EvenDaysLimit;//چهارشنبه
-        public int? ThursdayLimit { get; set; } = InmmemoryDB.OddDaysLimit;//پنجشنبه
-        public int? FridayLimit { get; set; } = InmmemoryDB.EvenDaysLimit;//جمعه
-        public int? SaturdayLimit { get; set; } = InmmemoryDB.EvenDaysLimit;//شنبه
+        public int? SunDayLimit { get; set; }//یکشنبه
+        public int? MondayLimit { get; set; }//دونشنبه
+        public int? TuesdayLimit { get; set; }//سه شنبه
+        public int? WednesdayLimit { get; set; }//چهارشنبه
+        public int? ThursdayLimit { get; set; }//پنجشنبه
+        public int? FridayLimit { get; set; }//جمعه
+        public int? SaturdayLimit { get; set; }//شنبه
         public bool DaysLimit(DayOfWeek day)
         {
             if(day == DayOfWeek.Sunday)//یکشنبه

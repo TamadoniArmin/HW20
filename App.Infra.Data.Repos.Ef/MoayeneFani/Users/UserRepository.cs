@@ -74,6 +74,7 @@ namespace App.Infra.Data.Repos.Ef.MoayeneFani.Users
                 user1.LastName = LastName;
                 user1.PhoneNumber = PhoneNumber;
                 user1.NationalCode = NationalCode;
+                _dbContext.Users.Add(user1);
                 _dbContext.SaveChanges();
                 return true;
             }

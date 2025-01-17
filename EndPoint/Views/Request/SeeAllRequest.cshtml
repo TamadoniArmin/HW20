@@ -48,27 +48,21 @@
 				<td>@item.CarName</td>
 				<td>@item.CarId</td>
 				<td>@item.Company</td>
+				<td>@item.Company</td>
 				<td>@item.TimeOfRequest</td>
-				<td><a class="btn btn-success" asp-action="UpdateRequest" asp-controller="Request" asp-route-id=@item.RequestId asp-route-Action=true>Accept</a></td>
-				<td><a class="btn btn-danger" asp-action="UpdateRequest" asp-controller="Request" asp-route-id=@item.RequestId asp-route-Action=false>deny</a></td>
+				<td><a class="btn btn-success" asp-action="UpdateRequest" asp-controller="Request" asp-route-id=@item.RequestId asp-route-WantToDo="@true">Accept</a></td>
+				<td><a class="btn btn-danger" asp-action="UpdateRequest" asp-controller="Request" asp-route-id=@item.RequestId asp-route-WantToDo="@false">deny</a></td>
 			</tr>
 		}
 	</tbody>
 </table>
 @* <a class="btn btn-primary" asp-action="AddUser" asp-controller="User">Add user</a> *@
-@* @if (TempData["LengthOfNC"] != null)
+@if (TempData["Error in Update Request"] != null)
 {
-	<div class="alert alert-danger">@TempData["LengthOfNC"] </div>
+	<div class="alert alert-danger">@TempData["Error in Update Request"] </div>
 }
-@if (TempData["Faile to add"] != null)
+@if (TempData["Succes Update Request"] != null)
 {
-	<div class="alert alert-danger">@TempData["Faile to add"] </div>
+	<div class="alert alert-success">@TempData["Succes Update Request"] </div>
 }
-@if (TempData["Faile edit"] != null)
-{
-	<div class="alert alert-danger">@TempData["Faile edit"] </div>
-}
-@if (TempData["Faile deleting"] != null)
-{
-	<div class="alert alert-danger">@TempData["Faile deleting"] </div>
-} *@
+

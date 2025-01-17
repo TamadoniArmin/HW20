@@ -7,6 +7,7 @@ using App.Domain.Core.MoayeneFani.Requests.Entities;
 using EndPoint.Models;
 using EndPoint.Models.Interface;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Identity.Client;
 
 namespace EndPoint.Controllers
@@ -20,7 +21,7 @@ namespace EndPoint.Controllers
         private readonly ISetDaysLimit _setDaysLimit;
         private readonly ICheckDayLimit _checkDayLimit;
         private readonly IConvertToDateTime _convertToDateTime;
-        public RequestController(IRequestAppService appService, ICarAppService carAppService, IListOfAllCars listOfAllCars,IConfiguration appsetting, ISetDaysLimit setDaysLimit, ICheckDayLimit checkDayLimit, IConvertToDateTime convertToDateTime)
+        public RequestController(IRequestAppService appService, ICarAppService carAppService, IListOfAllCars listOfAllCars, IConfiguration appsetting, ISetDaysLimit setDaysLimit, ICheckDayLimit checkDayLimit, IConvertToDateTime convertToDateTime)
         {
             _appService = appService;
             _carAppService = carAppService;
@@ -32,34 +33,36 @@ namespace EndPoint.Controllers
         }
         public IActionResult SeeAllRequest()
         {
-            var Requests=_appService.GetAllRequests();
+            var Requests = _appService.GetAllRequests();
             return View(Requests);
         }
         public IActionResult WriteRequest()
         {
             //_listOfAllCars.GetAllCars();
-            var Cars=_carAppService.GetAllCars();
+            var Cars = _carAppService.GetAllCars();
             return View(Cars);
         }
         [HttpPost]
-        public IActionResult WriteRequest(string Ownername,int carId, string NationalCode, string Plate, DateOnly ProductionDate)
+        public IActionResult WriteRequest(string Ownername, int carId, string NationalCode, string Plate, DateOnly ProductionDate,string ctiy,string street)
         {
             var WantedCar = _carAppService.GetById(carId);
             if ((Math.Abs(DateTime.Now.Year - ProductionDate.Year) <= 5))
             {
-                
-                App.Domain.Core.MoayeneFani.Requests.Entities.Request request=new Request();
+
+                App.Domain.Core.MoayeneFani.Requests.Entities.Request request = new Request();
                 request.OwnerName = Ownername;
                 request.CarName = WantedCar.Name;
                 request.CarId = WantedCar.CarId;
                 request.Company = WantedCar.Company;
                 request.NationalCode = NationalCode;
                 request.Plate = Plate;
-                request.Date=DateTime.Now;
+                request.Date = DateTime.Now;
                 request.ProductionDate = ProductionDate;
                 request.TimeOfRequest = DateTime.Now;
-                var Result1=_appService.AddToOutOfService(request);
-                if(!Result1)
+                request.City = ctiy;
+                request.Street = street;
+                var Result1 = _appService.AddToOutOfService(request);
+                if (!Result1)
                 {
                     TempData["Error in adding to Out of service"] = "Something went wrong in process of adding to list";
                     return RedirectToAction("WriteRequest");
@@ -72,11 +75,13 @@ namespace EndPoint.Controllers
             }
             else
             {
-                TempRequestDitails.OwnerName=Ownername;
+                TempRequestDitails.OwnerName = Ownername;
                 TempRequestDitails.CarModel = WantedCar;
-                TempRequestDitails.NationalCode=NationalCode;
-                TempRequestDitails.Plate=Plate;
-                TempRequestDitails.ProductionDate=ProductionDate;
+                TempRequestDitails.NationalCode = NationalCode;
+                TempRequestDitails.Plate = Plate;
+                TempRequestDitails.ProductionDate = ProductionDate;
+                TempRequestDitails.City = ctiy;
+                TempRequestDitails.Street = street;
                 return RedirectToAction("ChoeseDay");
             }
         }
@@ -84,46 +89,39 @@ namespace EndPoint.Controllers
         public IActionResult ChoeseDay()
         {
             ShowDaysForCompanies showDaysForCompanies = new ShowDaysForCompanies();
-            var car=TempRequestDitails.CarModel;
-            var Days= showDaysForCompanies.dayOfWeeks(car);
-            _setDaysLimit.setDaysLimit();
+            var car = TempRequestDitails.CarModel;
+            var Days = showDaysForCompanies.dayOfWeeks(car);
             return View(Days);
         }
         [HttpPost]
         public IActionResult ChoeseDay(DayOfWeek day)
         {
-            DateTime date=_convertToDateTime.GetDateTime(day);
-            var CheckDayLimit = _checkDayLimit.DaysLimit(day);
-            if(CheckDayLimit)
-            {
-                var Result = _appService.AddRequest(TempRequestDitails.OwnerName, TempRequestDitails.CarModel, date, TempRequestDitails.NationalCode, TempRequestDitails.Plate, TempRequestDitails.ProductionDate.Value);
-                if (!Result)
-                {
-                    TempData["Error in setting a Request"] = "Something went wrong! Please check your datas and try againe.";
-                    return RedirectToAction("WriteRequest");
-                }
-                else
-                {
-                    TempData["succes in setting Request"] = "Your Request has been added to list Please wait for comfermation from oprator";
-                    TempRequestDitails.ResetTempRequest();
-                    return RedirectToAction("Home");
-                }
-            }
-            else
-            {
-                TempData["Reached to day limit"] = "Sorry we can't book this day for you due to day's Limits.Please cheose another day.";
-                return RedirectToAction("ChoeseDay");
-            }
+            return RedirectToAction("Create", day);
+
+
+
+
+            //DateTime date = _convertToDateTime.GetDateTime(day);
+            //var CheckDayLimit = _checkDayLimit.DaysLimit(day);
+            //if (CheckDayLimit)
+            //{
+
+            //}
+            //else
+            //{
+            //    TempData["Reached to day limit"] = "Sorry we can't book this day for you due to day's Limits.Please cheose another day.";
+            //    return RedirectToAction("ChoeseDay");
+            //}
 
         }
         public IActionResult SeeComfirmedRequests()
         {
-            var Requests=_appService.GetConfirmedRequests();
+            var Requests = _appService.GetConfirmedRequests();
             return View(Requests);
         }
         public IActionResult SeeNotComfirmedRequests()
         {
-            var Reques= _appService.GetNotConfirmedRequests();
+            var Reques = _appService.GetNotConfirmedRequests();
             return View(Reques);
         }
         public IActionResult FindRequestByCar()
@@ -134,7 +132,7 @@ namespace EndPoint.Controllers
         [HttpPost]
         public IActionResult FindRequestByCar(int CarId)
         {
-            var Requests=_appService.GetRequestByCar(CarId);
+            var Requests = _appService.GetRequestByCar(CarId);
             //TempRequestDitails<<<-- داخلش ماشینا هست
             return View(Requests);
         }
@@ -145,7 +143,7 @@ namespace EndPoint.Controllers
         [HttpPost]
         public IActionResult findRequestByDate(DateTime Date)
         {
-            var Requests=_appService.GetRequestByDate(Date);
+            var Requests = _appService.GetRequestByDate(Date);
             return View(Requests);
         }
         public IActionResult FindRequestByRequestId()
@@ -155,7 +153,7 @@ namespace EndPoint.Controllers
         [HttpPost]
         public IActionResult FindRequestByRequestId(int RequestId)
         {
-            var Requests=_appService.GetRequestById(RequestId);
+            var Requests = _appService.GetRequestById(RequestId);
             return View(Requests);
         }
         public IActionResult FindRequestByNationalCode()
@@ -165,13 +163,13 @@ namespace EndPoint.Controllers
         [HttpPost]
         public IActionResult FindRequestByNationalCode(string NationalCode)
         {
-            var Requests=_appService.GetRequestByNationlaCode(NationalCode);
+            var Requests = _appService.GetRequestByNationlaCode(NationalCode);
             return View(Requests);
         }
-        public IActionResult UpdateRequest(int id,bool Action)
+        public IActionResult UpdateRequest(int id, bool WantToDo)
         {
-            var Result=_appService.UpdateRequest(id,Action);
-            if(!Result)
+            var Result = _appService.UpdateRequest(id, WantToDo);
+            if (!Result)
             {
                 TempData["Error in Update Request"] = "Something went wrong in Updating Request";
                 return RedirectToAction("SeeAllRequest");
@@ -181,6 +179,59 @@ namespace EndPoint.Controllers
                 TempData["Succes Update Request"] = "Request has been updated succesfully";
                 return RedirectToAction("SeeAllRequest");
             }
+
+        }
+        public IActionResult Create(DayOfWeek day)
+        {
+            DateTime date = DateTime.Now;
+            while (date.DayOfWeek != day)
+            {
+                date = date.AddDays(1);
+            }
+            int evenDayCapacity = int.Parse(_appsetting["RozMayne:Zoj"]);
+            int oddDayCapacity = int.Parse(_appsetting["RozMayne:Fard"]);
+
+            int capacity = (date.Day % 2 == 0) ? evenDayCapacity : oddDayCapacity;
+            var existingReservation = _appService.GetRequestByDate(date);
+
+            if (existingReservation != null && existingReservation.Capacity == 0)
+            {
+                TempData["Faile to choes this day"] = "ظرفیت این روز تکمیل است.";
+                return View("ChoeseDay");
+            }
+            else if (existingReservation != null)
+            {
+                existingReservation.Capacity--;
+                var Result = _appService.AddRequest(TempRequestDitails.OwnerName, TempRequestDitails.CarModel, date, TempRequestDitails.NationalCode, TempRequestDitails.Plate, TempRequestDitails.ProductionDate.Value, TempRequestDitails.City, TempRequestDitails.Street);
+                if (!Result)
+                {
+                    TempData["Error in setting a Request"] = "Something went wrong! Please check your datas and try againe.";
+                    return RedirectToAction("WriteRequest");
+                }
+                else
+                {
+                    TempData["succes in setting Request"] = "Your Request has been added to list Please wait for comfermation from oprator";
+                    TempRequestDitails.ResetTempRequest();
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            else
+            {
+                var Result = _appService.AddRequest(TempRequestDitails.OwnerName, TempRequestDitails.CarModel, date, TempRequestDitails.NationalCode, TempRequestDitails.Plate, TempRequestDitails.ProductionDate.Value, TempRequestDitails.City, TempRequestDitails.Street);
+                if (!Result)
+                {
+                    TempData["Error in setting a Request"] = "Something went wrong! Please check your datas and try againe.";
+                    return RedirectToAction("WriteRequest");
+                }
+                else
+                {
+                    TempData["succes in setting Request"] = "Your Request has been added to list Please wait for comfermation from oprator";
+                    TempRequestDitails.ResetTempRequest();
+                    return RedirectToAction("Index", "Home");
+                }
+            }
         }
     }
+
 }
+

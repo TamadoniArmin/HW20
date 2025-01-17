@@ -18,9 +18,9 @@ namespace App.Domain.Services.MoayeneFani.Requests
         {
             _requsetRepository = requsetRepository;
         }
-        public void AddRequest(string Ownername, Car car, DateTime date, string NationalCode, string Plate, DateOnly ProductionDate)
+        public void AddRequest(string Ownername, Car car, DateTime date, string NationalCode, string Plate, DateOnly ProductionDate, string City, string Street)
         {
-            _requsetRepository.AddRequest(Ownername, car, date, NationalCode, Plate, ProductionDate);
+            _requsetRepository.AddRequest(Ownername, car, date, NationalCode, Plate, ProductionDate,City,Street);
         }
 
         public void AddToOutOfService(Request request)

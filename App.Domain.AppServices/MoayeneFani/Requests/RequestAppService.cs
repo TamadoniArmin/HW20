@@ -19,7 +19,7 @@ namespace App.Domain.AppServices.MoayeneFani.Requests
             _requestService = requestService;
         }
 
-        public bool AddRequest(string Ownername, Car car, DateTime date, string NationalCode, string Plate, DateOnly ProductionDate)
+        public bool AddRequest(string Ownername, Car car, DateTime date, string NationalCode, string Plate, DateOnly ProductionDate, string City, string Street)
         {
             var Check = CheckExisting(Ownername, NationalCode, Plate);
             if (!Check)
@@ -35,12 +35,14 @@ namespace App.Domain.AppServices.MoayeneFani.Requests
                     request.NationalCode = NationalCode;
                     request.Plate = Plate;
                     request.ProductionDate = ProductionDate;
+                    request.City = City;
+                    request.Street = Street;
                     request.TimeOfRequest = DateTime.Now;
                     return AddToOutOfService(request);
                 }
                 else
                 {
-                    _requestService.AddRequest(Ownername, car, date, NationalCode, Plate, ProductionDate);
+                    _requestService.AddRequest(Ownername, car, date, NationalCode, Plate, ProductionDate, City, Street);
                     return true;
                 }
             }

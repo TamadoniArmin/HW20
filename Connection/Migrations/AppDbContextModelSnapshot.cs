@@ -86,6 +86,10 @@ namespace Connection.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Company")
                         .HasColumnType("int");
 
@@ -109,6 +113,10 @@ namespace Connection.Migrations
 
                     b.Property<DateOnly>("ProductionDate")
                         .HasColumnType("date");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("TimeOfRequest")
                         .HasColumnType("datetime2");

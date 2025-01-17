@@ -18,13 +18,10 @@ namespace App.Infra.Data.Repos.Ef.MoayeneFani.Requests
             _dbContext = dbContext;
         }
 
-        public void AddRequest(string Ownername, Car car, DateTime date, string NationalCode, string Plate, DateOnly ProductionDate)
+        public void AddRequest(string Ownername, Car car, DateTime date, string NationalCode, string Plate, DateOnly ProductionDate, string City, string Street)
         {
             Request request=new Request();
             request.OwnerName = Ownername;
-            //request.Car.CarId = car.CarId;
-            //request.Car.Name = car.Name;
-            //request.Car.Company = car.Company;
             request.CarName= car.Name;
             request.CarId=car.CarId;
             request.Company=car.Company;
@@ -32,6 +29,8 @@ namespace App.Infra.Data.Repos.Ef.MoayeneFani.Requests
             request.NationalCode = NationalCode;
             request.Plate = Plate;
             request.ProductionDate = ProductionDate;
+            request.City = City;
+            request.Street = Street;
             _dbContext.Requests.Add(request);
             _dbContext.SaveChanges();
         }

@@ -9,6 +9,8 @@ namespace EndPoint.Models
         public static string? NationalCode { get; set; }
         public static string? Plate { get; set; }
         public static DateOnly? ProductionDate { get; set; }
+        public static string? City { get; set; }
+        public static string? Street { get; set; }
         public static List<Car> InDBCars { get; set; }
         public static void ResetTempRequest()
         {

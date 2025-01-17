@@ -34,3 +34,11 @@
 	</div>
 	<button type="submit" class="btn btn-primary">Continue</button>
 </form>
+@if (TempData["Not Login"] != null)
+{
+	<div class="alert alert-danger">@TempData["Not Login"] </div>
+}
+@if (TempData["Error In Oprator Login"] != null)
+{
+	<div class="alert alert-danger">@TempData["Error In Oprator Login"] </div>
+}

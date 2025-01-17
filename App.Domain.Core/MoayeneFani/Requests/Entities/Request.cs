@@ -17,6 +17,8 @@ namespace App.Domain.Core.MoayeneFani.Requests.Entities
         public string Plate { get; set; }
         public string CarName { get; set; }
         public int CarId { get; set; }
+        public string City { get; set; }
+        public string Street { get; set; }
         public CompanyEnum Company { get; set; }
         public DateOnly ProductionDate { get; set; }
         public DateTime? Date { get; set; }

@@ -10,7 +10,7 @@ namespace App.Domain.Core.MoayeneFani.Requests.Service
 {
     public interface IRequestService
     {
-        public void AddRequest(string Ownername, Car car, DateTime date, string NationalCode, string Plate, DateOnly ProductionDate);
+        public void AddRequest(string Ownername, Car car, DateTime date, string NationalCode, string Plate, DateOnly ProductionDate, string City, string Street);
         public bool UpdateRequest(int Id, bool Action);
         public List<Request> GetAllRequests();
         public List<Request> GetConfirmedRequests();
