@@ -21,30 +21,45 @@ namespace App.Domain.AppServices.MoayeneFani.Requests
 
         public bool AddRequest(string Ownername, Car car, DateTime date, string NationalCode, string Plate, DateOnly ProductionDate, string City, string Street)
         {
-            var Check = CheckExisting(Ownername, NationalCode, Plate);
-            if (!Check)
+            if(ProductionDate> DateOnly.FromDateTime(DateTime.Now))
             {
-                if ((Math.Abs(DateTime.Now.Year - ProductionDate.Year) <= 5))
+                return false;
+            }
+            else
+            {
+                if(NationalCode.Length>10)
                 {
-                    Request request = new Request();
-                    request.OwnerName = Ownername;
-                    request.CarName = car.Name;
-                    request.CarId = car.CarId;
-                    request.Company = car.Company;
-                    request.ProductionDate = ProductionDate;
-                    request.NationalCode = NationalCode;
-                    request.Plate = Plate;
-                    request.ProductionDate = ProductionDate;
-                    request.City = City;
-                    request.Street = Street;
-                    request.TimeOfRequest = DateTime.Now;
-                    return AddToOutOfService(request);
+                    return false;
                 }
                 else
                 {
-                    _requestService.AddRequest(Ownername, car, date, NationalCode, Plate, ProductionDate, City, Street);
-                    return true;
+                    var Check = CheckExisting(Ownername, NationalCode, Plate);
+                    if (!Check)
+                    {
+                        if ((Math.Abs(DateTime.Now.Year - ProductionDate.Year) <= 5))
+                        {
+                            Request request = new Request();
+                            request.OwnerName = Ownername;
+                            request.CarName = car.Name;
+                            request.CarId = car.CarId;
+                            request.Company = car.Company;
+                            request.ProductionDate = ProductionDate;
+                            request.NationalCode = NationalCode;
+                            request.Plate = Plate;
+                            request.ProductionDate = ProductionDate;
+                            request.City = City;
+                            request.Street = Street;
+                            request.TimeOfRequest = DateTime.Now;
+                            return AddToOutOfService(request);
+                        }
+                        else
+                        {
+                            _requestService.AddRequest(Ownername, car, date, NationalCode, Plate, ProductionDate, City, Street);
+                            return true;
+                        }
+                    }
                 }
+
             }
             return false;
         }
