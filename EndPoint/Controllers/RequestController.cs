@@ -194,12 +194,12 @@ namespace EndPoint.Controllers
             int capacity = (date.Day % 2 == 0) ? evenDayCapacity : oddDayCapacity;
             var existingReservation = _appService.GetRequestByDate(date);
 
-            if (existingReservation != null && existingReservation.Capacity == 0)
+            if (existingReservation.Count>0 && existingReservation.Capacity == 0)
             {
                 TempData["Faile to choes this day"] = "ظرفیت این روز تکمیل است.";
                 return View("ChoeseDay");
             }
-            else if (existingReservation != null)
+            else if (existingReservation.Count >0)
             {
                 existingReservation.Capacity--;
                 var Result = _appService.AddRequest(TempRequestDitails.OwnerName, TempRequestDitails.CarModel, date, TempRequestDitails.NationalCode, TempRequestDitails.Plate, TempRequestDitails.ProductionDate.Value, TempRequestDitails.City, TempRequestDitails.Street);
