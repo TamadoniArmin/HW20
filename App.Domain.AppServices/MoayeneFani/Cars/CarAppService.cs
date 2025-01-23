@@ -32,6 +32,27 @@ namespace App.Domain.AppServices.MoayeneFani.Cars
             return false;
         }
 
+        public bool DeleteCar(int CarId)
+        {
+            return _carService.DeleteCar(CarId);
+        }
+
+        public bool EditCar(string Name, CompanyEnum company, string PreviousName)
+        {
+            var car=GetByName(PreviousName);
+            if (car == null)
+            {
+                return false;
+            }
+            else
+            {
+                Car car1 = new Car();
+                car1.Name = Name;
+                car1.Company = company;
+                return _carService.EditCar(car1,PreviousName); 
+            }
+        }
+
         public List<Car> GetAllCars()
         {
             return _carService.GetAllCars();

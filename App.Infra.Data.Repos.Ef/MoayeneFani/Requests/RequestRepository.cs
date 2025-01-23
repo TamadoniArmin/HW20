@@ -20,35 +20,33 @@ namespace App.Infra.Data.Repos.Ef.MoayeneFani.Requests
 
         public void AddRequest(string Ownername, Car car, DateTime date, string NationalCode, string Plate, DateOnly ProductionDate, string City, string Street)
         {
-            Request request=new Request();
-            request.OwnerName = Ownername;
-            request.CarName= car.Name;
-            request.CarId=car.CarId;
-            request.Company=car.Company;
-            request.Date = date;
-            request.NationalCode = NationalCode;
-            request.Plate = Plate;
-            request.ProductionDate = ProductionDate;
-            request.City = City;
-            request.Street = Street;
-            _dbContext.Requests.Add(request);
-            _dbContext.SaveChanges();
-        }
+            try
+            {
+                Request request = new Request();
+                request.OwnerName = Ownername;
+                request.CarName = car.Name;
+                request.CarId = car.CarId;
+                request.Company = car.Company;
+                request.Date = date;
+                request.NationalCode = NationalCode;
+                request.Plate = Plate;
+                request.ProductionDate = ProductionDate;
+                request.City = City;
+                request.Street = Street;
+                _dbContext.Requests.Add(request);
+                _dbContext.SaveChanges();
+            }
+            catch (Exception)
+            {
 
-        public void AddToOutOfService(Request request)
-        {
-            _dbContext.OutOfServiceRequests.Add(request);
-            _dbContext.SaveChanges();
+                throw;
+            }
+
         }
 
         public bool CheckExisting(string Ownername, string NationalCode, string Plate)
         {
             return _dbContext.Requests.Any(x => x.OwnerName == Ownername && x.NationalCode == NationalCode && x.Plate == Plate);
-        }
-
-        public bool CheckExistingInOutOfService(string Ownername, string NationalCode, string Plate)
-        {
-            return _dbContext.OutOfServiceRequests.Any(x => x.OwnerName==Ownername && x.NationalCode==NationalCode && x.Plate==Plate);
         }
 
         public List<Request> GetAllRequests()
@@ -73,7 +71,7 @@ namespace App.Infra.Data.Repos.Ef.MoayeneFani.Requests
 
         public List<Request> GetRequestByDate(DateTime Date)
         {
-            return _dbContext.Requests.Where(x=>x.Date == Date).ToList();
+            return _dbContext.Requests.Where(x=>x.Date.Value.Day == Date.Day).ToList();
         }
 
         public Request GetRequestById(int Id)
@@ -84,6 +82,11 @@ namespace App.Infra.Data.Repos.Ef.MoayeneFani.Requests
         public List<Request> GetRequestByNationlaCode(string NationalCode)
         {
             return _dbContext.Requests.Where(x=>x.NationalCode==NationalCode).ToList();
+        }
+
+        public bool GetRequestByPlate(string Plate)
+        {
+            return _dbContext.Requests.Any(x=>x.Plate==Plate && (x.TimeOfRequest.Year-DateTime.Now.Year)<1);
         }
 
         public bool UpdateRequest(int Id, bool Action)

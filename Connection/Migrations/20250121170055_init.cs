@@ -42,6 +42,30 @@ namespace Connection.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "OutOfServiceRequests",
+                columns: table => new
+                {
+                    OutOfServiceId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OwnerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NationalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Plate = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CarName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CarId = table.Column<int>(type: "int", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Company = table.Column<int>(type: "int", nullable: false),
+                    ProductionDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Confirmation = table.Column<bool>(type: "bit", nullable: false),
+                    TimeOfRequest = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OutOfServiceRequests", x => x.OutOfServiceId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -62,7 +86,7 @@ namespace Connection.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Request",
+                name: "Requests",
                 columns: table => new
                 {
                     RequestId = table.Column<int>(type: "int", nullable: false)
@@ -82,9 +106,9 @@ namespace Connection.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Request", x => x.RequestId);
+                    table.PrimaryKey("PK_Requests", x => x.RequestId);
                     table.ForeignKey(
-                        name: "FK_Request_Cars_CarId",
+                        name: "FK_Requests_Cars_CarId",
                         column: x => x.CarId,
                         principalTable: "Cars",
                         principalColumn: "CarId",
@@ -120,8 +144,8 @@ namespace Connection.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Request_CarId",
-                table: "Request",
+                name: "IX_Requests_CarId",
+                table: "Requests",
                 column: "CarId");
         }
 
@@ -132,7 +156,10 @@ namespace Connection.Migrations
                 name: "Oprators");
 
             migrationBuilder.DropTable(
-                name: "Request");
+                name: "OutOfServiceRequests");
+
+            migrationBuilder.DropTable(
+                name: "Requests");
 
             migrationBuilder.DropTable(
                 name: "UserCars");

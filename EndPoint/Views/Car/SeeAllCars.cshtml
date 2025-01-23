@@ -25,10 +25,10 @@
 		background-color: #f2f2f2;
 	}
 </style>
-<form asp-action="Search" method="post">
+<form asp-action="FindByName" method="post">
 	<div class="form-group">
-		<label for="Search">Search</label>
-		<input type="text" class="form-control" id="Search" name="Partofname" required />
+		<label for="name">Search</label>
+		<input type="text" class="form-control" id="name" name="name" required />
 	</div>
 	<button type="submit" class="btn btn-primary">Continue</button>
 </form>
@@ -45,27 +45,23 @@
 			<tr>
 				<td>@item.Name</td>
 				<td>@item.Company</td>
-				@* <td><a class="btn btn-warning" asp-action="EditUser" asp-controller="User" asp-route-Id=@item.Id>Edit</a></td>
-				<td><a class="btn btn-danger" asp-action="DeleteUser" asp-controller="User" asp-route-id=@item.Id>Delete</a></td> *@
+				<td><a class="btn btn-warning" asp-action="EditCar" asp-controller="Car" asp-route-CarId=@item.CarId>Edit</a></td>
+				<td><a class="btn btn-danger" asp-action="DeleteCar" asp-controller="Car" asp-route-CarId=@item.CarId>Delete</a></td>
 			</tr>
 		}
 	</tbody>
 </table>
 <a class="btn btn-primary" asp-action="OpratorsHomePage" asp-controller="Oprator">بازگشت به صفحه ی اصلی</a>
-@* <a class="btn btn-primary" asp-action="AddUser" asp-controller="User">Add user</a> *@
-@* @if (TempData["LengthOfNC"] != null)
+<a class="btn btn-primary" asp-action="AddCar" asp-controller="Car">Add Car</a>
+@if (TempData["successful Delete Car"] != null)
 {
-	<div class="alert alert-danger">@TempData["LengthOfNC"] </div>
+	<div class="alert alert-success">@TempData["successful Delete Car"] </div>
 }
-@if (TempData["Faile to add"] != null)
+@if (TempData["Failed to delete car"] != null)
 {
-	<div class="alert alert-danger">@TempData["Faile to add"] </div>
+	<div class="alert alert-danger">@TempData["Failed to delete car"] </div>
 }
-@if (TempData["Faile edit"] != null)
+@if (TempData["Successful edit car"] != null)
 {
-	<div class="alert alert-danger">@TempData["Faile edit"] </div>
+	<div class="alert alert-success">@TempData["Successful edit car"] </div>
 }
-@if (TempData["Faile deleting"] != null)
-{
-	<div class="alert alert-danger">@TempData["Faile deleting"] </div>
-} *@

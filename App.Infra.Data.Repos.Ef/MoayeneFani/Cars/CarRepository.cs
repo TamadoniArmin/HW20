@@ -19,7 +19,58 @@ namespace App.Infra.Data.Repos.Ef.MoayeneFani.Cars
         }
         public void AddCar(Car car)
         {
+            try
+            {
+
+                _dbContext.Cars.Add(car);
+                _dbContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
             _dbContext.Cars.Add(car);
+        }
+        public bool DeleteCar(int CarId)
+        {
+            try
+            {
+                var Car = _dbContext.Cars.FirstOrDefault(x => x.CarId == CarId);
+                if (Car != null)
+                {
+                    _dbContext.Cars.Remove(Car);
+                    _dbContext.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool EditCar(Car car, string PreviousName)
+        {
+            try
+            {
+                var WantedCar = _dbContext.Cars.FirstOrDefault(x => x.Name==PreviousName);
+                if (WantedCar != null)
+                {
+                    WantedCar.Name = car.Name;
+                    WantedCar.Company=car.Company;
+                    _dbContext.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public List<Car> GetAllCars()

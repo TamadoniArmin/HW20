@@ -10,6 +10,7 @@ namespace EndPoint.Models
         public static string TempName { get; set; }
         public static int? EvenDaysLimit { get; set; }
         public static int? OddDaysLimit { get; set; }
+        public static string? PriorCarName { get; set; }
         //public static bool True { get; set; } = true;
         //public static bool False { get; set; } = false;
     }

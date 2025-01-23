@@ -22,6 +22,16 @@ namespace App.Domain.Services.MoayeneFani.Cars
             _carRepository.AddCar(car);
         }
 
+        public bool DeleteCar(int CarId)
+        {
+            return _carRepository.DeleteCar(CarId);
+        }
+
+        public bool EditCar(Car car, string PreviousName)
+        {
+            return _carRepository.EditCar(car,PreviousName);
+        }
+
         public List<Car> GetAllCars()
         {
             return _carRepository.GetAllCars();

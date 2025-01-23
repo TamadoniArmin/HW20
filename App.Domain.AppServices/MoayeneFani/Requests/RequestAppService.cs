@@ -21,56 +21,30 @@ namespace App.Domain.AppServices.MoayeneFani.Requests
 
         public bool AddRequest(string Ownername, Car car, DateTime date, string NationalCode, string Plate, DateOnly ProductionDate, string City, string Street)
         {
-            if(ProductionDate> DateOnly.FromDateTime(DateTime.Now))
+            var CheckHistory = _requestService.GetRequestByPlate(Plate);
+            if(!CheckHistory)
             {
-                return false;
-            }
-            else
-            {
-                if(NationalCode.Length>10)
+                if (ProductionDate > DateOnly.FromDateTime(DateTime.Now))
                 {
                     return false;
                 }
                 else
                 {
-                    var Check = CheckExisting(Ownername, NationalCode, Plate);
-                    if (!Check)
+                    if (NationalCode.Length > 10)
                     {
-                        if ((Math.Abs(DateTime.Now.Year - ProductionDate.Year) <= 5))
+                        return false;
+                    }
+                    else
+                    {
+                        var Check = CheckExisting(Ownername, NationalCode, Plate);
+                        if (!Check)
                         {
-                            Request request = new Request();
-                            request.OwnerName = Ownername;
-                            request.CarName = car.Name;
-                            request.CarId = car.CarId;
-                            request.Company = car.Company;
-                            request.ProductionDate = ProductionDate;
-                            request.NationalCode = NationalCode;
-                            request.Plate = Plate;
-                            request.ProductionDate = ProductionDate;
-                            request.City = City;
-                            request.Street = Street;
-                            request.TimeOfRequest = DateTime.Now;
-                            return AddToOutOfService(request);
-                        }
-                        else
-                        {
-                            _requestService.AddRequest(Ownername, car, date, NationalCode, Plate, ProductionDate, City, Street);
+                            _requestService.AddRequest(Ownername,car,date, NationalCode, Plate, ProductionDate, City, Street);
                             return true;
                         }
                     }
+
                 }
-
-            }
-            return false;
-        }
-
-        public bool AddToOutOfService(Request request)
-        {
-            var check = CheckExistingInOutOfService(request.OwnerName, request.NationalCode, request.Plate);
-            if (!check)
-            {
-                _requestService.AddToOutOfService(request);
-                return true;
             }
             return false;
         }
@@ -79,12 +53,6 @@ namespace App.Domain.AppServices.MoayeneFani.Requests
         {
             return _requestService.CheckExisting(Ownername, NationalCode, Plate);
         }
-
-        public bool CheckExistingInOutOfService(string Ownername, string NationalCode, string Plate)
-        {
-            return _requestService.CheckExistingInOutOfService(Ownername, NationalCode, Plate);
-        }
-
         public List<Request> GetAllRequests()
         {
             return _requestService.GetAllRequests();
@@ -118,6 +86,11 @@ namespace App.Domain.AppServices.MoayeneFani.Requests
         public List<Request> GetRequestByNationlaCode(string NationalCode)
         {
             return _requestService.GetRequestByNationlaCode(NationalCode);
+        }
+
+        public bool GetRequestByPlate(string Plate)
+        {
+            return _requestService.GetRequestByPlate(Plate);
         }
 
         public bool UpdateRequest(int Id, bool Action)

@@ -1,4 +1,6 @@
 ﻿@using App.Domain.Core.MoayeneFani.Cars.Enum;
+@using App.Domain.Core.MoayeneFani.Cars.Entities;
+@model Car
 @{
 	ViewData["Title"] = "Add Car";
 }
@@ -24,23 +26,24 @@
 		background-color: #f2f2f2;
 	}
 </style>
-<form asp-action="AddCar" method="post">
+<form asp-action="EditCar" method="post">
 	<div class="form-group">
 		<label for="Name">CarName</label>
-		<input type="text" class="form-control" id="Name" name="Name" required />
+		<input type="text" class="form-control" id="Name" name="Name" value="@Model.Name" required />
 	</div>
 	</div>
 	<div class="input-group mb-2">
 		<label class="input-group-text" for="inputGroupSelect01">company</label>
 		<select class="form-select" id="inputGroupSelect01" name="company">
-			<option selected>Choose Company</option>
+			<option selected value="@Model.Company">Choose Company</option>
 			<option value="0" required>@CompanyEnum.IranKhodro</option>
 			<option value="1" required>@CompanyEnum.Saipa</option>
 		</select>
 	</div>
-	<button type="submit" class="btn btn-primary">Continue</button>
+	<button type="submit" class="btn btn-primary">ویرایش</button>
 </form>
-@if (TempData["Error For Add Car"] != null)
+@if (TempData["Failed to Edit car"] != null)
 {
-	<div class="alert alert-danger">@TempData["Error For Add Car"] </div>
+	<div class="alert alert-danger">@TempData["Failed to Edit car"] </div>
 }
+

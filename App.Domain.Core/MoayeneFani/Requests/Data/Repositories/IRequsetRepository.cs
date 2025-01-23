@@ -17,10 +17,9 @@ namespace App.Domain.Core.MoayeneFani.Requests.Data.Repositories
         public List<Request> GetNotConfirmedRequests();
         public Request GetRequestById(int Id);
         public List<Request> GetRequestByNationlaCode(string NationalCode);
+        public bool GetRequestByPlate(string Plate);
         public List<Request> GetRequestByDate(DateTime Date);
         public List<Request> GetRequestByCar(int CarId);
-        public void AddToOutOfService(Request request);
         public bool CheckExisting(string Ownername, string NationalCode, string Plate);
-        public bool CheckExistingInOutOfService(string Ownername, string NationalCode, string Plate);
     }
 }

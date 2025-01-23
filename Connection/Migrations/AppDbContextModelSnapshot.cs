@@ -71,6 +71,61 @@ namespace Connection.Migrations
                     b.ToTable("Oprators");
                 });
 
+            modelBuilder.Entity("App.Domain.Core.MoayeneFani.OutOfServices.Entities.OutOfService", b =>
+                {
+                    b.Property<int>("OutOfServiceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OutOfServiceId"));
+
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CarName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Company")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Confirmation")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NationalCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OwnerName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Plate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("ProductionDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TimeOfRequest")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("OutOfServiceId");
+
+                    b.ToTable("OutOfServiceRequests");
+                });
+
             modelBuilder.Entity("App.Domain.Core.MoayeneFani.Requests.Entities.Request", b =>
                 {
                     b.Property<int>("RequestId")
@@ -125,7 +180,7 @@ namespace Connection.Migrations
 
                     b.HasIndex("CarId");
 
-                    b.ToTable("Request");
+                    b.ToTable("Requests");
                 });
 
             modelBuilder.Entity("App.Domain.Core.MoayeneFani.Users.Entities.User", b =>

@@ -23,19 +23,9 @@ namespace App.Domain.Services.MoayeneFani.Requests
             _requsetRepository.AddRequest(Ownername, car, date, NationalCode, Plate, ProductionDate,City,Street);
         }
 
-        public void AddToOutOfService(Request request)
-        {
-            _requsetRepository.AddToOutOfService(request);
-        }
-
         public bool CheckExisting(string Ownername, string NationalCode, string Plate)
         {
             return _requsetRepository.CheckExisting(Ownername, NationalCode,Plate);
-        }
-
-        public bool CheckExistingInOutOfService(string Ownername, string NationalCode, string Plate)
-        {
-            return _requsetRepository.CheckExistingInOutOfService(Ownername,NationalCode,Plate);
         }
 
         public List<Request> GetAllRequests()
@@ -71,6 +61,11 @@ namespace App.Domain.Services.MoayeneFani.Requests
         public List<Request> GetRequestByNationlaCode(string NationalCode)
         {
             return _requsetRepository.GetRequestByNationlaCode(NationalCode);
+        }
+
+        public bool GetRequestByPlate(string Plate)
+        {
+            return _requsetRepository.GetRequestByPlate(Plate);
         }
 
         public bool UpdateRequest(int Id, bool Action)

@@ -27,12 +27,12 @@
 </style>
 <form asp-action="WriteRequest" method="post">
 	<div class="form-group">
-		<label for="Ownername">Ownername</label>
-		<input type="text" class="form-control" id="Ownername" name="Ownername" required />
+		<label for="NewRequest.OwnerName">Ownername</label>
+		<input type="text" class="form-control" id="NewRequest.OwnerName" name="NewRequest.OwnerName" required />
 	</div>
 	<div class="input-group mb-3">
 		<label class="input-group-text" for="inputGroupSelect01">carId</label>
-		<select class="form-select" id="inputGroupSelect01" name="carId">
+		<select class="form-select" id="inputGroupSelect01" name="NewRequest.CarId">
 			<option selected>Choose gender...</option>
 			@foreach(var item in Model)
 			{
@@ -41,24 +41,24 @@
 		</select>
 	</div>
 	<div class="form-group">
-		<label for="NationalCode">NationalCode</label>
-		<input type="text" class="form-control" id="NationalCode" name="NationalCode" required />
+		<label for="NewRequest.NationalCode">NationalCode</label>
+		<input type="text" class="form-control" id="NewRequest.NationalCode" name="NewRequest.NationalCode" required />
 	</div>
 	<div class="form-group">
-		<label for="Plate">Plate</label>
-		<input type="text" class="form-control" id="Plate" name="Plate" required />
+		<label for="NewRequest.Plate">Plate</label>
+		<input type="text" class="form-control" id="NewRequest.Plate" name="NewRequest.Plate" required />
 	</div>
 	<div class="form-group">
-		<label for="ProductionDate">ProductionDate</label>
-		<input type="date" class="form-control" id="ProductionDate" name="ProductionDate" required />
+		<label for="NewRequest.ProductionDate">ProductionDate</label>
+		<input type="date" class="form-control" id="NewRequest.ProductionDate" name="NewRequest.ProductionDate" required />
 	</div>
 	<div class="form-group">
-		<label for="ctiy">ctiy</label>
-		<input type="text" class="form-control" id="ctiy" name="ctiy" required />
+		<label for="NewRequest.City">ctiy</label>
+		<input type="text" class="form-control" id="NewRequest.City" name="NewRequest.City" required />
 	</div>
 	<div class="form-group">
-		<label for="street">street</label>
-		<input type="text" class="form-control" id="street" name="street" required />
+		<label for="NewRequest.Street">street</label>
+		<input type="text" class="form-control" id="NewRequest.Street" name="NewRequest.Street" required />
 	</div>
 	<button type="submit" class="btn btn-primary">Continue</button>
 </form>

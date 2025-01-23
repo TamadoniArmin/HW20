@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using App.Domain.Core.MoayeneFani.Cars.Entities;
 using App.Domain.Core.MoayeneFani.Operators.Entities;
+using App.Domain.Core.MoayeneFani.OutOfServices.Entities;
 using App.Domain.Core.MoayeneFani.Requests.Entities;
 using App.Domain.Core.MoayeneFani.Users.Entities;
 using App.Domain.Core.MoayeneFani.UsersCars.Entities;
@@ -31,7 +32,7 @@ namespace Connection
         public DbSet<Car> Cars { get; set; }
         public DbSet<Oprator> Oprators { get; set; }
         public DbSet<Request> Requests { get; set; }
-        public DbSet<Request> OutOfServiceRequests { get; set; }
+        public DbSet<OutOfService> OutOfServiceRequests { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserCar> UserCars { get; set; }
     }

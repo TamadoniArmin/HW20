@@ -15,5 +15,7 @@ namespace App.Domain.Core.MoayeneFani.Cars.Data.Repositories
         public Car GetByName(string name);
         public List<Car> GetByCompany(CompanyEnum company);
         public void AddCar(Car car);
+        public bool EditCar(Car car ,string PreviousName);
+        public bool DeleteCar(int CarId);
     }
 }

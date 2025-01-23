@@ -1,5 +1,6 @@
 ﻿using App.Domain.Core.MoayeneFani.Cars.AppService;
 using App.Domain.Core.MoayeneFani.Cars.Enum;
+using EndPoint.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EndPoint.Controllers
@@ -33,6 +34,42 @@ namespace EndPoint.Controllers
                 TempData["Error For Add Car"] = "Something went wrong in adding process";
                 return RedirectToAction("AddCar");
             }
+        }
+        [HttpGet]
+        public IActionResult DeleteCar(int CarId)
+        {
+            var Result=_carAppService.DeleteCar(CarId);
+            if(Result)
+            {
+                TempData["successful Delete Car"] = "Car has been removed from database succesfully";
+                return RedirectToAction("SeeAllCars");
+            }
+            TempData["Failed to delete car"] = "System Error! Please Check the database and try again";
+            return RedirectToAction("SeeAllCars");
+        }
+        [HttpGet]
+        public IActionResult EditCar(int CarId)
+        {
+            var Car=_carAppService.GetById(CarId);
+            if(Car==null)
+            {
+                TempData["Failed to Edit car"] = "System Error! Please Check the database and try again";
+                return RedirectToAction("SeeAllCars");
+            }
+            InmmemoryDB.PriorCarName= Car.Name;
+            return View(Car);
+        }
+        [HttpPost]
+        public IActionResult EditCar(string Name,CompanyEnum Company)
+        {
+            var Result=_carAppService.EditCar(Name, Company,InmmemoryDB.PriorCarName);
+            if(!Result)
+            {
+                TempData["Failed to Edit car"] = "System Error! Please Check the database and try again";
+                return View();
+            }
+            TempData["Successful edit car"] = "Car has been edited successfully";
+            return RedirectToAction("SeeAllCars");
         }
         public IActionResult SeeIranKhodroCars()
         {

@@ -9,6 +9,8 @@
   <ItemGroup>
     <Folder Include="MoayeneFani\Cars\DTOs\" />
     <Folder Include="MoayeneFani\Operators\Enum\" />
+    <Folder Include="MoayeneFani\OutOfServices\DTOs\" />
+    <Folder Include="MoayeneFani\OutOfServices\Enum\" />
     <Folder Include="MoayeneFani\Requests\DTOs\" />
     <Folder Include="MoayeneFani\Requests\Enum\" />
     <Folder Include="MoayeneFani\UsersCars\DTOs\" />
