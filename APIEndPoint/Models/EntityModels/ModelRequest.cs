@@ -22,7 +22,7 @@ namespace APIEndPoint.Models
         [Required(ErrorMessage ="وارد کردن سال تولید خودرو الزامیست")]
         public DateOnly ProductionDate { get; set; }
         [Required(ErrorMessage = "انتخاب روز معاینه الزامیست")]
-        public DateTime Date { get; set; }
+        public int Date { get; set; }
         //public DateTime? Date { get; set; }
         //public bool Confirmation { get; set; } = false;
         public DateTime TimeOfRequest { get; set; }

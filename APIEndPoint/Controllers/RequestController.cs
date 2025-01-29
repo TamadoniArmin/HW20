@@ -1,5 +1,6 @@
 ﻿using APIEndPoint.Models;
 using APIEndPoint.Models.Interfaces;
+using APIEndPoint.Models.Methods;
 using App.Domain.Core.MoayeneFani.Cars.AppService;
 using App.Domain.Core.MoayeneFani.Cars.Enum;
 using App.Domain.Core.MoayeneFani.OutOfServices.AppService;
@@ -89,10 +90,11 @@ namespace EndPoint.Controllers
                     }
                     else
                     {
-                        if (car.Company == CompanyEnum.IranKhodro && (NewRequest.Date.DayOfWeek == DayOfWeek.Saturday || NewRequest.Date.DayOfWeek == DayOfWeek.Monday || NewRequest.Date.DayOfWeek == DayOfWeek.Wednesday))
+                        var Day=FindDay.DayOfWeek(NewRequest.Date);
+                        if (car.Company == CompanyEnum.IranKhodro && (Day == DayOfWeek.Saturday || Day == DayOfWeek.Monday || Day == DayOfWeek.Wednesday))
                         {
                             DateTime date = DateTime.Now;
-                            while (date.DayOfWeek != NewRequest.Date.DayOfWeek)
+                            while (date.DayOfWeek != Day)
                             {
                                 date = date.AddDays(1);
                             }
