@@ -9,6 +9,7 @@ namespace EndPoint.Models.Requests
         public string NationalCode { get; set; }
         public string Plate { get; set; }
         //public string CarName { get; set; }
+        
         public int CarId { get; set; }
         public string City { get; set; }
         public string Street { get; set; }
