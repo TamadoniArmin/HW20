@@ -12,9 +12,9 @@ namespace EndPoint.Controllers
         {
             _carAppService = carAppService;
         }
-        public IActionResult SeeAllCars()
+        public IActionResult SeeAllCars(CancellationToken cancellation)
         {
-            var Cars= _carAppService.GetAllCars();
+            var Cars= _carAppService.GetAllCars(cancellation);
             return View(Cars);
         }
         public IActionResult AddCar()

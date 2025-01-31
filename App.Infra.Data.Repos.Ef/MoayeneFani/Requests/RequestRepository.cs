@@ -7,6 +7,7 @@ using App.Domain.Core.MoayeneFani.Cars.Entities;
 using App.Domain.Core.MoayeneFani.Requests.Data.Repositories;
 using App.Domain.Core.MoayeneFani.Requests.Entities;
 using Connection;
+using Microsoft.EntityFrameworkCore;
 
 namespace App.Infra.Data.Repos.Ef.MoayeneFani.Requests
 {
@@ -38,10 +39,8 @@ namespace App.Infra.Data.Repos.Ef.MoayeneFani.Requests
             }
             catch (Exception)
             {
-
                 throw;
             }
-
         }
 
         public bool CheckExisting(string Ownername, string NationalCode, string Plate)
@@ -49,9 +48,9 @@ namespace App.Infra.Data.Repos.Ef.MoayeneFani.Requests
             return _dbContext.Requests.Any(x => x.OwnerName == Ownername && x.NationalCode == NationalCode && x.Plate == Plate);
         }
 
-        public List<Request> GetAllRequests()
+        public async Task<List<Request>> GetAllRequests(CancellationToken cancellation)
         {
-            return _dbContext.Requests.ToList();
+            return await _dbContext.Requests.ToListAsync();
         }
 
         public List<Request> GetConfirmedRequests()

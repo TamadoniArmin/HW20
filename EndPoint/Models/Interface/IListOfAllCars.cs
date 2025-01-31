@@ -2,7 +2,7 @@
 {
     public interface IListOfAllCars
     {
-        public void GetAllCars();
+        public void GetAllCars(CancellationToken cancellation);
         public void RemoveCarsInMemmory();
     }
 }

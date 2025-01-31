@@ -53,9 +53,9 @@ namespace App.Domain.AppServices.MoayeneFani.Cars
             }
         }
 
-        public List<Car> GetAllCars()
+        public async Task<List<Car>> GetAllCars(CancellationToken cancellation)
         {
-            return _carService.GetAllCars();
+            return await _carService.GetAllCars(cancellation);
         }
 
         public List<Car> GetByCompany(CompanyEnum company)

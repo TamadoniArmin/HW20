@@ -28,9 +28,9 @@ namespace App.Domain.Services.MoayeneFani.Requests
             return _requsetRepository.CheckExisting(Ownername, NationalCode,Plate);
         }
 
-        public List<Request> GetAllRequests()
+        public async Task<List<Request>> GetAllRequests(CancellationToken cancellation)
         {
-            return _requsetRepository.GetAllRequests();
+            return await _requsetRepository.GetAllRequests(cancellation);
         }
 
         public List<Request> GetConfirmedRequests()

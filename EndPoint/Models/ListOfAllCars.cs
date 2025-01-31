@@ -11,9 +11,9 @@ namespace EndPoint.Models
         {
             _carAppService = carAppService;
         }
-        public void GetAllCars()
+        public async void GetAllCars(CancellationToken cancellation)
         {
-            var Cars=_carAppService.GetAllCars();
+            var Cars=await _carAppService.GetAllCars(cancellation);
             foreach (var Car in Cars)
             {
                 TempRequestDitails.InDBCars.Add(Car);

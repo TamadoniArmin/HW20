@@ -53,9 +53,9 @@ namespace App.Domain.AppServices.MoayeneFani.Requests
         {
             return _requestService.CheckExisting(Ownername, NationalCode, Plate);
         }
-        public List<Request> GetAllRequests()
+        public async Task<List<Request>> GetAllRequests(CancellationToken cancellation)
         {
-            return _requestService.GetAllRequests();
+            return await _requestService.GetAllRequests(cancellation);
         }
 
         public List<Request> GetConfirmedRequests()

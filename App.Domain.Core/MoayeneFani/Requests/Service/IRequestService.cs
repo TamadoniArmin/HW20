@@ -12,7 +12,7 @@ namespace App.Domain.Core.MoayeneFani.Requests.Service
     {
         public void AddRequest(string Ownername, Car car, DateTime date, string NationalCode, string Plate, DateOnly ProductionDate, string City, string Street);
         public bool UpdateRequest(int Id, bool Action);
-        public List<Request> GetAllRequests();
+        public Task<List<Request>> GetAllRequests(CancellationToken cancellation);
         public List<Request> GetConfirmedRequests();
         public List<Request> GetNotConfirmedRequests();
         public Request GetRequestById(int Id);

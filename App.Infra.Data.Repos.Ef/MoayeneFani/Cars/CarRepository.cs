@@ -7,6 +7,7 @@ using App.Domain.Core.MoayeneFani.Cars.Data.Repositories;
 using App.Domain.Core.MoayeneFani.Cars.Entities;
 using App.Domain.Core.MoayeneFani.Cars.Enum;
 using Connection;
+using Microsoft.EntityFrameworkCore;
 
 namespace App.Infra.Data.Repos.Ef.MoayeneFani.Cars
 {
@@ -21,7 +22,6 @@ namespace App.Infra.Data.Repos.Ef.MoayeneFani.Cars
         {
             try
             {
-
                 _dbContext.Cars.Add(car);
                 _dbContext.SaveChanges();
             }
@@ -73,9 +73,9 @@ namespace App.Infra.Data.Repos.Ef.MoayeneFani.Cars
             }
         }
 
-        public List<Car> GetAllCars()
+        public async Task<List<Car>> GetAllCars(CancellationToken cancellation)
         {
-            return _dbContext.Cars.ToList();
+            return await _dbContext.Cars.ToListAsync();
         }
 
         public List<Car> GetByCompany(CompanyEnum company)

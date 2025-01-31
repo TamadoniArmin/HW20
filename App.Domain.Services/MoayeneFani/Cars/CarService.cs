@@ -32,9 +32,9 @@ namespace App.Domain.Services.MoayeneFani.Cars
             return _carRepository.EditCar(car,PreviousName);
         }
 
-        public List<Car> GetAllCars()
+        public async Task<List<Car>> GetAllCars(CancellationToken cancellation)
         {
-            return _carRepository.GetAllCars();
+            return await _carRepository.GetAllCars(cancellation);
         }
 
         public List<Car> GetByCompany(CompanyEnum company)

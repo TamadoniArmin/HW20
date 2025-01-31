@@ -37,15 +37,15 @@ namespace EndPoint.Controllers
             _OutOfServiceAppService = outOfServiceAppService;
         }
         //InMemmoryRequest request1 = new InMemmoryRequest();
-        public IActionResult SeeAllRequest()
+        public IActionResult SeeAllRequest(CancellationToken cancellation)
         {
-            var Requests = _appService.GetAllRequests();
+            var Requests = _appService.GetAllRequests(cancellation);
             return View(Requests);
         }
-        public IActionResult WriteRequest()
+        public IActionResult WriteRequest(CancellationToken cancellation)
         {
 
-            var Cars = _carAppService.GetAllCars();
+            var Cars = _carAppService.GetAllCars(cancellation);
             return View(Cars);
         }
         [HttpPost]
@@ -116,9 +116,9 @@ namespace EndPoint.Controllers
             var Reques = _appService.GetNotConfirmedRequests();
             return View(Reques);
         }
-        public IActionResult FindRequestByCar()
+        public IActionResult FindRequestByCar(CancellationToken cancellation)
         {
-            _listOfAllCars.GetAllCars();
+            _listOfAllCars.GetAllCars(cancellation);
             return View();
         }
         [HttpPost]

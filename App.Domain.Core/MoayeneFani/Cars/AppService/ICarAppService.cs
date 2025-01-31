@@ -10,12 +10,12 @@ namespace App.Domain.Core.MoayeneFani.Cars.AppService
 {
     public interface ICarAppService
     {
-        public List<Car> GetAllCars();
+        public Task<List<Car>> GetAllCars(CancellationToken cancellation);
         public Car GetById(int id);
         public Car GetByName(string name);
         public List<Car> GetByCompany(CompanyEnum company);
         public bool AddCar(string Name,CompanyEnum company);
-        //public bool AddCar(Car car);
+
         public bool EditCar(string Name, CompanyEnum company, string PreviousName);
         public bool DeleteCar(int CarId);
     }
