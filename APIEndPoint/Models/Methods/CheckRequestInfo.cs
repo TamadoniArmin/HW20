@@ -25,7 +25,7 @@ namespace APIEndPoint.Models.Methods
         public Massage CheckPlate(string Plate)
         {
             var Result=_requestAppService.GetRequestByPlate(Plate);
-            if(!Result)
+            if(Result)
             {
                 return new Massage(false, "درخواستی به این شماره پلاک در دیتا بیس موجود است");
             }
@@ -42,7 +42,7 @@ namespace APIEndPoint.Models.Methods
         public Massage CheckExist(string Ownername, string NationalCode, string Plate)
         {
             var Result= _requestAppService.CheckExisting(Ownername, NationalCode, Plate);
-            if(!Result)
+            if(Result)
             {
                 return new Massage(false, "درخواستی با این مشخصات در دیتا بیس موجود است");
             }
